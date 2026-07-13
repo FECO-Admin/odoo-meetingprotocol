@@ -1,0 +1,135 @@
+<odoo>
+    <!-- Agenda Item List View -->
+    <record id="meeting_agenda_item_view_tree" model="ir.ui.view">
+        <field name="name">meeting.agenda.item.list</field>
+        <field name="model">meeting.agenda.item</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="title"/>
+                <field name="presenter_id"/>
+                <field name="duration_minutes"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Agenda Item Form View -->
+    <record id="meeting_agenda_item_view_form" model="ir.ui.view">
+        <field name="name">meeting.agenda.item.form</field>
+        <field name="model">meeting.agenda.item</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="title"/>
+                    <field name="presenter_id"/>
+                    <field name="duration_minutes"/>
+                </group>
+                <field name="notes" widget="html"/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action Item List View -->
+    <record id="meeting_action_item_view_tree" model="ir.ui.view">
+        <field name="name">meeting.action.item.list</field>
+        <field name="model">meeting.action.item</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="responsible_id"/>
+                <field name="deadline"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action Item Form View -->
+    <record id="meeting_action_item_view_form" model="ir.ui.view">
+        <field name="name">meeting.action.item.form</field>
+        <field name="model">meeting.action.item</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                    <field name="responsible_id"/>
+                    <field name="deadline"/>
+                    <field name="state" widget="radio"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Meeting Protocol List View -->
+    <record id="meeting_protocol_view_list" model="ir.ui.view">
+        <field name="name">meeting.protocol.list</field>
+        <field name="model">meeting.protocol</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="title"/>
+                <field name="date"/>
+                <field name="state" widget="badge"/>
+                <field name="moderator_id"/>
+                <field name="participant_ids" widget="many2many_tags"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Meeting Protocol Form View -->
+    <record id="meeting_protocol_view_form" model="ir.ui.view">
+        <field name="name">meeting.protocol.form</field>
+        <field name="model">meeting.protocol</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,review,final"/>
+                    <button name="action_draft" type="object" string="Entwurf" invisible="state != 'review'" class="btn-secondary"/>
+                    <button name="action_review" type="object" string="In Prüfung" invisible="state != 'draft'" class="btn-primary"/>
+                    <button name="action_final" type="object" string="Freigeben" invisible="state != 'review'" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="title" placeholder="Meeting-Titel..."/></h1>
+                        <group>
+                            <group>
+                                <field name="date"/>
+                                <field name="duration_hours"/>
+                                <field name="location"/>
+                            </group>
+                            <group>
+                                <field name="moderator_id"/>
+                                <field name="participant_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                    </div>
+                    <notebook>
+                        <page string="Protokoll">
+                            <field name="minutes_text" widget="html" placeholder="Protokoll hier eingeben..."/>
+                        </page>
+                        <page string="Tagesordnung">
+                            <field name="agenda_ids"/>
+                        </page>
+                        <page string="Aufgaben">
+                            <field name="action_item_ids"/>
+                        </page>
+                        <page string="Notizen">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_meeting_protocol" model="ir.actions.act_window">
+        <field name="name">Meetingprotokolle</field>
+        <field name="res_model">meeting.protocol</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_meeting_protocol_root"
+        name="Meetingprotokolle"
+        action="action_meeting_protocol"
+        sequence="90"/>
+</odoo>

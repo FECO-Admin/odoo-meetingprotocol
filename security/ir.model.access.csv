@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_meeting_protocol_user,meeting.protocol user,model_meeting_protocol,base.group_user,1,1,1,1
+access_meeting_agenda_item_user,meeting.agenda.item user,model_meeting_agenda_item,base.group_user,1,1,1,1
+access_meeting_action_item_user,meeting.action.item user,model_meeting_action_item,base.group_user,1,1,1,1
