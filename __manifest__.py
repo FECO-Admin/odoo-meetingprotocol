@@ -3,7 +3,7 @@
     "version": "19.0.1.0.0",
     "category": "Productivity",
     "license": "LGPL-3",
-    "author": "FE",
+    "author": "FE Gruppe",
     "summary": "Meetingprotokolle mit Teilnehmern, Tagesordnung und Aufgaben",
     "depends": ["base", "mail"],
     "data": [
