@@ -4,6 +4,8 @@
     "category": "Productivity",
     "license": "LGPL-3",
     "author": "FE Gruppe",
+    "icon": "/meeting_protocol/static/description/icon.svg",
+    "web_icon": "meeting_protocol,static/description/icon.svg",
     "summary": "Meetingprotokolle mit Teilnehmern, Tagesordnung und Aufgaben",
     "depends": ["base", "mail"],
     "data": [
